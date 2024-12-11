@@ -1,8 +1,9 @@
 import express from "express";
 import db from "@repo/db/client";
 const app = express();
+app.use(express.json()); 
 
-app.post("./hdfcWebhook", async (req, res) => {
+app.post("/hdfcWebhook", async (req, res) => {
   // TODO: Add zod validation here
   // check if this request actually came from hdfc and a webhook secret key
   const paymentInformation = {
@@ -49,4 +50,6 @@ app.post("./hdfcWebhook", async (req, res) => {
   }
 });
 
-app.listen(3003);
+app.listen(3003,()=>{
+  console.log("Server is running of 3003")
+});
