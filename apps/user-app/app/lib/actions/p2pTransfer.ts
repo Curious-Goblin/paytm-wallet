@@ -24,6 +24,11 @@ export const p2pTransfer = async (number: string, value: string) => {
         message: "details are incorrect",
       };
     }
+    if (Number(userId) == recipient.id) {
+      return {
+        message: "you can't send money to yourself",
+      };
+    }
 
     await prisma.$transaction(async (tx) => {
       await tx.$queryRaw`SELECT * FROM "Balance" WHERE "userId" = ${Number(userId)} FOR UPDATE`;
@@ -35,9 +40,6 @@ export const p2pTransfer = async (number: string, value: string) => {
           amount: true,
         },
       });
-      console.log("above sleep");
-      await new Promise((res) => setTimeout(res, 4000));
-      console.log("after sleep");
       if (!senderBalance || senderBalance.amount < amount) {
         throw new Error("insufficient balance");
       }
@@ -61,6 +63,15 @@ export const p2pTransfer = async (number: string, value: string) => {
           amount: {
             increment: amount,
           },
+        },
+      });
+
+      await tx.p2pTransfer.create({
+        data: {
+          fromUserId: Number(userId),
+          toUserId: recipient.id,
+          timestamp: new Date(),
+          amount: amount,
         },
       });
     });
