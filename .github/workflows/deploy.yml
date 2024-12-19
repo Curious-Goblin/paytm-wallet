@@ -28,7 +28,7 @@ jobs:
               uses: docker/build-push-action@v2
               with:
                 context: .
-                file: ./Dockerfile
+                file: ./docker/Dockerfile.user
                 push: true
                 tag: poddarsourabh9939/ci-cd:latest
 
