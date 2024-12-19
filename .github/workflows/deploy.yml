@@ -12,8 +12,8 @@ jobs:
             - name: Check out Repo
               uses: actions/checkout@v2
 
-            - name: Prepare the Dockerfile
-              run: cp ./docker/Dockerfile.user ./Dockerfile
+            # - name: Prepare the Dockerfile
+            #   run: cp ./docker/Dockerfile.user ./Dockerfile
 
             - name: List files for debugging
               run: ls -al
