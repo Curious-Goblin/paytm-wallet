@@ -27,7 +27,7 @@ jobs:
                 context: .
                 file: ./Dockerfile
                 push: true
-                tagpoddarsourabh9939/ci-cd:latests: poddarsourabh9939/ci-cd:latest
+                tag: poddarsourabh9939/ci-cd:latest
 
             - name: Verify push Image
               run: docker pull poddarsourabh9939/ci-cd:latest
