@@ -2,7 +2,7 @@ name: build succeds on PR
 
 on:
   pull_request:
-    branches: -main
+    branches: -'**'
 
 jobs:
   build:
